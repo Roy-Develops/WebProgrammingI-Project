@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav {
+        background-color: #0f0f0f;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+      }
+
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px;
+        margin: 0 10px;
+        transition: background-color 0.5s ease, border-bottom 0.5s ease;
+        border-bottom: 2px solid transparent;
+      }
+
+      nav a:hover {
+        background-color: #007bff;
+        border-bottom-color: #fff;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+      }
+
+      button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .delete-profile-button,
+      .sign-out-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .sign-out-button {
+        margin-right: 10px;
+      }
+
+      .delete-profile-button {
+        margin-bottom: 50px;
+      }
+      #OK {
+        margin-top: 10px;
+      }
+      .error {
+        color: red;
+      }
+      #uploadBtn {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-top: 15px;
+      }
+
+      #uploadBtn:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="http://localhost:3000/profile" class="active">My Profile</a>
+      <a href="http://localhost:3000/survey">Survey</a>
+      <a href="http://localhost:3000/contactUs">Contact Us</a>
+      <a href="http://localhost:3000/products">Buy products</a>
+    </nav>
+
+    <div class="container">
+      <h1>My Profile</h1>
+      <form
+        name="info"
+        onsubmit="return validateForm()"
+        method="post"
+        action="/profile"
+      >
+        <label for="firstName">First Name:</label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          value="<%= client.first_name %>"
+          required
+        />
+
+        <label for="lastName">Last Name:</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          value="<%= client.last_name %>"
+          required
+        />
+
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value="<%= client.email %>"
+          required
+        />
+
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value="<%= client.pass %>"
+          required
+        />
+        <span id="passwordError" class="error"></span>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input
+          type="tel"
+          id="phoneNumber"
+          name="phoneNumber"
+          value="<%= client.phone_number %>"
+          required
+        />
+        <span id="phoneError" class="error"></span>
+
+        <button type="submit">Save Changes</button>
+      </form>
+      <button id="uploadBtn" onclick="redirectToUpload()">Upload a file</button>
+      <form method="post" action="/deleteUser">
+        <button class="delete-profile-button" type="submit">
+          Delete Profile
+        </button>
+      </form>
+
+      <form method="post" action="/signOut">
+        <button class="sign-out-button" type="submit">Sign Out</button>
+      </form>
+    </div>
+    <script>
+      function validateForm() {
+        let password = document.forms["info"]["password"].value;
+        let phone = document.forms["info"]["phoneNumber"].value;
+        document.getElementById("phoneError").textContent = "";
+        document.getElementById("passwordError").textContent = "";
+        let valid = true;
+        // Validate Password
+        let passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/;
+        if (!passwordPattern.test(password)) {
+          document.getElementById("passwordError").textContent =
+            "Password must be at least 8 characters long and contain 1 capital letter and 1 special character.";
+          valid = false;
+        }
+
+        // Validate Phone Number
+        let phonePattern = /^\d{8}$/;
+        if (!phonePattern.test(phone)) {
+          document.getElementById("phoneError").textContent =
+            "Phone number must be an 8-digit number.";
+          valid = false;
+        }
+
+        return valid;
+      }
+      function redirectToUpload() {
+        window.location.href = "http://localhost:3000/uploads";
+      }
+    </script>
+  </body>
+</html>

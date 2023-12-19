@@ -1,0 +1,57 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 350px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.day {
+  padding: 10px;
+  border: 1px solid #eee;
+  text-align: center;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.day:hover {
+  background-color: #f0f0f0;
+}
+
+.day.reserved {
+  background-color: red;
+  color: white;
+}
+
+.weekday {
+  font-weight: bold;
+  background-color: #4caf50;
+  color: white;
+}
+#reservationForm {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#reservationForm button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#reservationForm button:hover {
+  background-color: #45a049;
+}

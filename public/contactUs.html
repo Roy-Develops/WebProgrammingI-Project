@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projet Web</title>
+    <link rel="stylesheet" href="contact style.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <script
+      src="https://kit.fontawesome.com/17bfd3eff1.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav>
+      <a href="http://localhost:3000/profile" class="active">My Profile</a>
+      <a href="http://localhost:3000/survey">Survey</a>
+      <a href="http://localhost:3000/contactUs">Contact Us</a>
+      <a href="http://localhost:3000/products">Buy products</a>
+    </nav>
+
+    <div class="hero">
+      <form action="/contactUs" method="post">
+        <div class="raw">
+          <div class="input-group">
+            <input type="text" id="name" name="name" required />
+            <label for="name"><i class="fa-solid fa-user"></i> Your Name</label>
+          </div>
+          <div class="input-group">
+            <input type="text" id="number" name="number" required />
+            <label for="number"
+              ><i class="fa-solid fa-phone"></i> Phone no.</label
+            >
+          </div>
+        </div>
+        <div class="input-group">
+          <input type="email" id="email" name="email" required />
+          <label for="email"><i class="fa-solid fa-envelope"></i> Email</label>
+        </div>
+        <div class="input-group">
+          <textarea id="message" name="message" rows="8" required></textarea>
+          <label for="message"
+            ><i class="fa-solid fa-comment"></i> Your Message</label
+          >
+        </div>
+        <button type="submit">
+          SUBMIT <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

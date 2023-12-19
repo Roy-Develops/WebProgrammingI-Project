@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/navbar.css" />
+    <title>Product List</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      td:not(:last-child) {
+        border-right: 1px solid #ddd;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+      }
+      label {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      input[type="text"] {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+      button[type="submit"] {
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+      body {
+        font-family: "YourFontName", Arial, sans-serif;
+      }
+      .search-form {
+        display: block;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .search-input {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-right: 10px;
+        width: 200px;
+      }
+      .search-button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .search-button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="http://localhost:3000/profile" class="active">My Profile</a>
+      <a href="http://localhost:3000/survey">Survey</a>
+      <a href="http://localhost:3000/contactUs">Contact Us</a>
+      <a href="http://localhost:3000/products">Buy products</a>
+    </nav>
+    <h1>Product List</h1>
+    <form class="search-form" method="post" action="/search">
+      <input
+        type="text"
+        name="searchedProduct"
+        class="search-input"
+        placeholder="Search products..."
+      />
+      <button type="submit" class="search-button">Search</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach(product => { %>
+        <tr>
+          <td><%= product.id %></td>
+          <td><%= product.product_name %></td>
+          <td><%= product.price %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <form method="post" action="/purchase">
+      <label for="productId">Enter the product ID you want to purchase:</label>
+      <input
+        type="text"
+        id="productId"
+        name="productId"
+        pattern="[0-9]+"
+        title="Please enter only digits"
+        required
+      />
+      <button type="submit">Purchase</button>
+    </form>
+    <script>
+      function redirect() {
+        window.location.href = "/search";
+      }
+    </script>
+  </body>
+</html>
